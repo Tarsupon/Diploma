@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable, of } from 'rxjs';
-import { User } from './models/user';
+import { User } from '../shared/models/user';
 import {
   AngularFirestore,
   AngularFirestoreDocument
@@ -38,6 +38,7 @@ export class AuthService {
   async googleSignin() {
     const provider = new auth.GoogleAuthProvider();
     const credential = await this.afAuth.auth.signInWithPopup(provider);
+    this.router.navigate(['mainboard']);
     return this.updateUserData(credential.user);
   }
 
@@ -46,15 +47,14 @@ export class AuthService {
     return this.router.navigate(['/']);
   }
 
-  private updateUserData(user) {
+  public updateUserData(user) {
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
 
     const data = {
       email: user.email,
       displayName: user.displayName,
       photoURL: user.photoURL,
-      uid: user.uid
-
+      uid: user.uid,
     };
 
     return userRef.set(data, { merge: true });

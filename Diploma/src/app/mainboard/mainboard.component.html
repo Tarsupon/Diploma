@@ -1,0 +1,10 @@
+<mat-card fxLayout="row" fxLayoutAlign="end center" fxFlex="100%">
+    <img class="header-photo" [src]="user.photoURL">
+    <button mat-raised-button [matMenuTriggerFor]="headerMenu">
+        {{user.displayName}}
+    </button>
+    <mat-menu #headerMenu="matMenu">
+        <button mat-menu-item (click)="auth.signOut()">Log Out</button>
+    </mat-menu>
+</mat-card>
+<button mat-menu-item (click)="createBoard()">Create board</button>

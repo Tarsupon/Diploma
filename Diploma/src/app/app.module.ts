@@ -6,8 +6,9 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
-import { AuthService } from './core/auth.service';
 import { ProfileComponent } from './profile/profile.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AngularFireDatabase, AngularFireDatabaseModule } from '@angular/fire/database-deprecated';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,9 @@ import { ProfileComponent } from './profile/profile.component';
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
-    CoreModule
+    AngularFireDatabaseModule,
+    CoreModule,
+    BrowserAnimationsModule
 
   ],
   providers: [],
