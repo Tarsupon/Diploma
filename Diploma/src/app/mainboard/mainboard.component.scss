@@ -4,3 +4,21 @@
     border-radius: 50%;
     border: 1px solid gray;
 }
+.example-list {
+    border: solid 2px #ccc;
+    min-height: 50vh;
+    border-radius: 4px;
+    overflow-y: auto;
+
+    .task {
+        cursor: pointer;
+    }
+}
+.add-board-card {
+    cursor: pointer;
+    height: 100%;
+    text-align: center;
+    &:hover {
+        background-color: #ccc;
+    }
+}

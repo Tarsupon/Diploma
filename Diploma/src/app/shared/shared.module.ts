@@ -10,7 +10,8 @@ import {
   MatFormFieldModule,
   MatIconModule,
   MatExpansionModule,
-  MatMenuModule
+  MatMenuModule,
+  MatDialogModule
 } from '@angular/material';
 
 const MATERIAL_MODULES = [
@@ -21,7 +22,8 @@ const MATERIAL_MODULES = [
   MatIconModule,
   DragDropModule,
   MatExpansionModule,
-  MatMenuModule
+  MatMenuModule,
+  MatDialogModule
 ];
 
 @NgModule({
