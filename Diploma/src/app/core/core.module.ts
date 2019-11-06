@@ -4,7 +4,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AuthService } from './auth.service';
-import { BoardsService } from './boards.service';
+import { UserService } from './user.service';
 
 
 
@@ -21,6 +21,6 @@ import { BoardsService } from './boards.service';
     AngularFirestoreModule,
     AngularFireStorageModule,
   ],
-  providers: [AuthService, BoardsService]
+  providers: [AuthService, UserService]
 })
 export class CoreModule { }

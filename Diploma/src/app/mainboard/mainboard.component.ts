@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../core';
-import { BoardsService } from '../core/boards.service';
-import { Board } from '../shared/models/board';
+import { AuthService, UserService } from '../core';
+import { User } from '../shared/models/user';
+import * as _ from 'lodash';
+
 
 @Component({
   selector: 'app-mainboard',
@@ -10,25 +11,47 @@ import { Board } from '../shared/models/board';
 })
 export class MainboardComponent implements OnInit {
 
-  public user: firebase.UserInfo;
+  public authUser: firebase.UserInfo;
+  public user: User;
 
-  constructor(public auth: AuthService, public service: BoardsService) { }
+  constructor(public auth: AuthService, public userService: UserService) { }
 
   ngOnInit() {
-    this.auth.getLoggedInUser().pipe().subscribe(
-      user => {
-        this.user = user;
-      }
-    );
-    console.log(this.service.getItemsList());
+    this.auth.getLoggedInUser().pipe().subscribe(user => {
+        this.authUser = user;
+      });
+
+    this.userService.getUser().pipe().subscribe(user => {
+        this.user = _.cloneDeep(user);
+      });
   }
   createBoard() {
-    const board: Board = {
-      boardId: 1,
-      boardName: 'Todo',
-      boardTasks: []
+    this.user.boards = {
+          // Todo: [
+          //   {
+          //     id: '99999',
+          //     header: 'TODO'
+          //   },
+          //   {
+          //     id: '99999',
+          //     header: 'lil'
+          //   }
+          // ],
+          // InProgress: [
+          //   {
+          //     id: '99999',
+          //     header: 'InPROGREEs'
+          //   }
+          // ],
+          // Done: [
+          //   {
+          //     id: '99999',
+          //     header: 'DONe!!!'
+          //   }
+          // ]
     };
-    this.service.createBoard(board);
+    this.userService.updateUser(this.user);
+    // console.log(this.user)
   }
 
 }

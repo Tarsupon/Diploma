@@ -38,7 +38,7 @@ export class AuthService {
   async googleSignin() {
     const provider = new auth.GoogleAuthProvider();
     const credential = await this.afAuth.auth.signInWithPopup(provider);
-    this.router.navigate(['mainboard']);
+    this.router.navigate(['/mainboard']);
     return this.updateUserData(credential.user);
   }
 
@@ -48,7 +48,7 @@ export class AuthService {
   }
 
   public updateUserData(user) {
-    const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
 
     const data = {
       email: user.email,
