@@ -12,10 +12,17 @@
         <!-- CONTENT -->
         <mat-card cdkDropListGroup class="main-content" fxFlex="100%" fxLayout="row"fxLayoutAlign="space-around start">
             <mat-card *ngFor="let board of user.boards | keyvalue" fxFlex="">
-                <mat-card-header>
+                <mat-card-header fxLayoutAlign="space-between start">
                     <mat-card-title>{{board.key}}</mat-card-title>
                     <mat-card-subtitle>Task board</mat-card-subtitle>
+                    <button mat-icon-button [matMenuTriggerFor]="boardMenu">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
                 </mat-card-header>
+                <mat-menu #boardMenu="matMenu">
+                        <button mat-menu-item (click)="deleteBoard(board.key)">Delete</button>
+                        <button mat-menu-item >Edit</button>
+                </mat-menu>
 
                 <div cdkDropList
                     [cdkDropListData]="user.boards[board.key]"

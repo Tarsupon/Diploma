@@ -4,7 +4,7 @@ import { User, Task } from '../shared/models/user';
 import * as _ from 'lodash';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { MatDialog } from '@angular/material';
-import { AddBoardComponent } from './add-board/add-board.component';
+import { AddBoardComponent } from './modals/add-board/add-board.component';
 
 
 @Component({
@@ -41,6 +41,10 @@ export class MainboardComponent implements OnInit {
       this.user.boards[result] = [];
       this.userService.updateUser(this.user);
     });
+  }
+
+  deleteBoard(boardKey) {
+
   }
 
   createBoard() {

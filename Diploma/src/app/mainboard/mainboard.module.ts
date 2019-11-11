@@ -4,7 +4,7 @@ import { MainboardComponent } from './mainboard.component';
 import { MainboardRoutingModule } from './mainboard-routing.module';
 import { SharedModule } from '../shared';
 import { CoreModule } from '../core';
-import { AddBoardComponent } from './add-board/add-board.component';
+import { AddBoardComponent } from './modals/add-board/add-board.component';
 
 
 
