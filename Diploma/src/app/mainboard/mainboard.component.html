@@ -21,7 +21,7 @@
                 </mat-card-header>
                 <mat-menu #boardMenu="matMenu">
                         <button mat-menu-item (click)="deleteBoard(board.key)">Delete</button>
-                        <button mat-menu-item >Edit</button>
+                        <button mat-menu-item (click)="editBoard(board.key)">Edit</button>
                 </mat-menu>
 
                 <div cdkDropList

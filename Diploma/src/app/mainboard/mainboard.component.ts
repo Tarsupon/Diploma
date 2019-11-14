@@ -5,6 +5,7 @@ import * as _ from 'lodash';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { MatDialog } from '@angular/material';
 import { AddBoardComponent } from './modals/add-board/add-board.component';
+import { EditBoardComponent } from './modals/edit-board/edit-board.component';
 
 
 @Component({
@@ -44,9 +45,24 @@ export class MainboardComponent implements OnInit {
   }
 
   deleteBoard(boardKey) {
-
+    delete this.user.boards[boardKey];
+    this.userService.updateUser(this.user);
   }
 
+  editBoard(boardKey) {
+    console.log(boardKey);
+    const dialogRef = this.dialog.open(EditBoardComponent, {
+      width: '250px',
+      data: { boardKey },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.user.boards[result] = Object.assign(this.user.boards[boardKey]);
+      delete this.user.boards[boardKey];
+
+      this.userService.updateUser(this.user);
+    });
+  }
   createBoard() {
     this.user.boards = {
           Todo: [

@@ -5,11 +5,12 @@ import { MainboardRoutingModule } from './mainboard-routing.module';
 import { SharedModule } from '../shared';
 import { CoreModule } from '../core';
 import { AddBoardComponent } from './modals/add-board/add-board.component';
+import { EditBoardComponent } from './modals/edit-board/edit-board.component';
 
 
 
 @NgModule({
-  declarations: [MainboardComponent, AddBoardComponent],
+  declarations: [MainboardComponent, AddBoardComponent, EditBoardComponent],
   imports: [
     CommonModule,
     MainboardRoutingModule,
@@ -17,10 +18,12 @@ import { AddBoardComponent } from './modals/add-board/add-board.component';
     CoreModule
   ],
   exports: [
-    AddBoardComponent
+    AddBoardComponent,
+    EditBoardComponent,
   ],
   entryComponents: [
-    AddBoardComponent
+    AddBoardComponent,
+    EditBoardComponent
   ]
 })
 export class MainboardModule { }

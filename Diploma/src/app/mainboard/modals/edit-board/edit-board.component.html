@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Edit board</h1>
+<div mat-dialog-content>
+  <p>Board Name</p>
+  <mat-form-field>
+    <input matInput type="text" #boardInput [(value)]="data.boardKey">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-button [mat-dialog-close]="boardInput.value" cdkFocusInitial>Change</button>
+</div>
