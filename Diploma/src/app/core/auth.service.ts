@@ -9,6 +9,7 @@ import {
 } from '@angular/fire/firestore';
 import { switchMap } from 'rxjs/operators';
 import { auth } from 'firebase';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,8 @@ export class AuthService {
   constructor(
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
-    private router: Router
+    private router: Router,
+    private myuser: UserService
   ) {
     this.user$ = this.afAuth.authState.pipe(
       switchMap( user => {
@@ -48,7 +50,7 @@ export class AuthService {
   }
 
   public updateUserData(user) {
-    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
+    const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
 
     const data = {
       email: user.email,

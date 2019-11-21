@@ -3,12 +3,21 @@ export interface User {
     displayName: string;
     photoURL?: string;
     uid: string;
-    boards: {
-        [boardName: string]: Task[];
-    };
+    boards?: Board[];
+    // boards: {
+    //     [boardName: string]: Task[];
+    // };
+}
+
+export interface Board {
+    id: string;
+    boardName: string;
+    description: string;
+    tasks: Task[];
 }
 
 export interface Task {
     id: string;
+    description: string;
     header: string;
 }

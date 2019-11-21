@@ -11,27 +11,27 @@
                 </mat-card>
         <!-- CONTENT -->
         <mat-card cdkDropListGroup class="main-content" fxFlex="100%" fxLayout="row"fxLayoutAlign="space-around start">
-            <mat-card *ngFor="let board of user.boards | keyvalue" fxFlex="">
+            <mat-card *ngFor="let board of user.boards" fxFlex="">
                 <mat-card-header fxLayoutAlign="space-between start">
-                    <mat-card-title>{{board.key}}</mat-card-title>
-                    <mat-card-subtitle>Task board</mat-card-subtitle>
+                    <mat-card-title>{{board.boardName}}</mat-card-title>
+                    <mat-card-subtitle>{{board.description}}</mat-card-subtitle>
                     <button mat-icon-button [matMenuTriggerFor]="boardMenu">
                         <mat-icon>more_vert</mat-icon>
                     </button>
                 </mat-card-header>
                 <mat-menu #boardMenu="matMenu">
-                        <button mat-menu-item (click)="deleteBoard(board.key)">Delete</button>
-                        <button mat-menu-item (click)="editBoard(board.key)">Edit</button>
+                        <button mat-menu-item (click)="deleteBoard(board.id)">Delete</button>
+                        <button mat-menu-item (click)="editBoard(board.id)">Edit</button>
                 </mat-menu>
 
                 <div cdkDropList
-                    [cdkDropListData]="user.boards[board.key]"
+                    [cdkDropListData]="user.boards[board.boardName]"
                     class="example-list"
                     (cdkDropListDropped)="drop($event)"
                     fxLayout="column">
 
                     <mat-card class="task"
-                              *ngFor="let item of user.boards[board.key]"
+                              *ngFor="let item of user.boards[board.boardName]"
                               cdkDrag>
                         <mat-card-header>
                             <mat-card-title>{{item.header}}</mat-card-title>

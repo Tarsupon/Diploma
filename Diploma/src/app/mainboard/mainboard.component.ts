@@ -6,6 +6,8 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 import { MatDialog } from '@angular/material';
 import { AddBoardComponent } from './modals/add-board/add-board.component';
 import { EditBoardComponent } from './modals/edit-board/edit-board.component';
+import * as uuid from 'uuid';
+
 
 
 @Component({
@@ -33,19 +35,22 @@ export class MainboardComponent implements OnInit {
   }
 
   openAddBoardDialog(): void {
+    if (this.user.boards === undefined) {
+      this.user.boards = [];
+    }
     const dialogRef = this.dialog.open(AddBoardComponent, {
       width: '250px',
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      this.user.boards[result] = [];
+      this.user.boards.push({id: uuid.v4(), boardName: result, description: 'hui', tasks: []});
       this.userService.updateUser(this.user);
     });
   }
 
-  deleteBoard(boardKey) {
-    delete this.user.boards[boardKey];
+  deleteBoard(id) {
+    this.user.boards.splice(this.user.boards.findIndex(item => item.id === id), 1);
     this.userService.updateUser(this.user);
   }
 
@@ -63,34 +68,34 @@ export class MainboardComponent implements OnInit {
       this.userService.updateUser(this.user);
     });
   }
-  createBoard() {
-    this.user.boards = {
-          Todo: [
-            {
-              id: '99999',
-              header: 'TODO'
-            },
-            {
-              id: '99999',
-              header: 'lil'
-            }
-          ],
-          InProgress: [
-            {
-              id: '99999',
-              header: 'InPROGREEs'
-            }
-          ],
-          Done: [
-            {
-              id: '99999',
-              header: 'DONe!!!'
-            }
-          ]
-    };
-    this.userService.updateUser(this.user);
-    // console.log(this.user)
-  }
+  // createBoard() {
+  //   this.user.boards = {
+  //         Todo: [
+  //           {
+  //             id: '99999',
+  //             header: 'TODO'
+  //           },
+  //           {
+  //             id: '99999',
+  //             header: 'lil'
+  //           }
+  //         ],
+  //         InProgress: [
+  //           {
+  //             id: '99999',
+  //             header: 'InPROGREEs'
+  //           }
+  //         ],
+  //         Done: [
+  //           {
+  //             id: '99999',
+  //             header: 'DONe!!!'
+  //           }
+  //         ]
+  //   };
+  //   this.userService.updateUser(this.user);
+  //   // console.log(this.user)
+  // }
   drop(event: CdkDragDrop<Task[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
