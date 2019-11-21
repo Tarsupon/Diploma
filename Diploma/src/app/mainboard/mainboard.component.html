@@ -11,7 +11,7 @@
                 </mat-card>
         <!-- CONTENT -->
         <mat-card cdkDropListGroup class="main-content" fxFlex="100%" fxLayout="row"fxLayoutAlign="space-around start">
-            <mat-card *ngFor="let board of user.boards" fxFlex="">
+            <mat-card class="board" *ngFor="let board of user.boards; let i = index" fxFlex="">
                 <mat-card-header fxLayoutAlign="space-between start">
                     <mat-card-title>{{board.boardName}}</mat-card-title>
                     <mat-card-subtitle>{{board.description}}</mat-card-subtitle>
@@ -25,17 +25,33 @@
                 </mat-menu>
 
                 <div cdkDropList
-                    [cdkDropListData]="user.boards[board.boardName]"
+                    [cdkDropListData]="user.boards[i].tasks"
                     class="example-list"
                     (cdkDropListDropped)="drop($event)"
                     fxLayout="column">
 
                     <mat-card class="task"
-                              *ngFor="let item of user.boards[board.boardName]"
+                              *ngFor="let item of user.boards[i].tasks"
                               cdkDrag>
-                        <mat-card-header>
+                        <mat-card-header class="task-header">
                             <mat-card-title>{{item.header}}</mat-card-title>
-                            <mat-card-subtitle>Here it would be description</mat-card-subtitle>
+                            <button mat-icon-button [matMenuTriggerFor]="taskMenu">
+                                    <mat-icon>more_vert</mat-icon>
+                            </button>
+                        </mat-card-header>
+                        <mat-card-content class="word-wrap">
+                            <p>{{item.description}}</p>
+                        </mat-card-content>
+                        <mat-menu #taskMenu="matMenu">
+                                <button mat-menu-item (click)="deleteTask(board.id, item.id)">Delete</button>
+                                <button mat-menu-item (click)="editTask(board.id, item.id)">Edit</button>
+                        </mat-menu>
+
+                    </mat-card>
+
+                    <mat-card class="add-task-card" fxLayoutAlign="center center" (click)="openAddTaskDialog(board.id)">
+                        <mat-card-header>
+                            <mat-card-title>Add new Task</mat-card-title>
                         </mat-card-header>
                     </mat-card>
                 </div>

@@ -4,14 +4,19 @@
     border-radius: 50%;
     border: 1px solid gray;
 }
+.main-content {
+}
 .example-list {
     border: solid 2px #ccc;
     min-height: 50vh;
     border-radius: 4px;
     overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 70vh;
 
     .task {
         cursor: pointer;
+       
     }
 }
 .add-board-card {
@@ -21,4 +26,22 @@
     &:hover {
         background-color: #ccc;
     }
+}
+.board {
+    max-width: 25%;
+    
+}
+.add-task-card {
+    cursor: pointer;
+    height: 10%;
+    text-align: center;
+    &:hover {
+        background-color: #ccc;
+    }
+}
+.word-wrap {
+    word-wrap: break-word;
+}
+.task-header {
+    justify-content: space-between;
 }

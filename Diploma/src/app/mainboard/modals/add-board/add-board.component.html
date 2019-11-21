@@ -1,11 +1,20 @@
-<h1 mat-dialog-title>Add board</h1>
-<div mat-dialog-content>
-  <p>Board Name</p>
-  <mat-form-field>
-    <input matInput type="text" #boardInput>
-  </mat-form-field>
-</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onCancel()">Cancel</button>
-  <button mat-button [mat-dialog-close]="boardInput.value" cdkFocusInitial>Add</button>
-</div>
+<form [formGroup]="form">
+  <h1 mat-dialog-title>Add board</h1>
+    <div mat-dialog-content>
+
+      <p>Board Name</p>
+      <mat-form-field>
+        <input matInput type="text" formControlName="newBoardName">
+      </mat-form-field>
+
+      <p>Board Description</p>
+      <mat-form-field>
+        <input matInput type="text" formControlName="newBoardDescription">
+      </mat-form-field>
+
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button (click)="onCancel()">Cancel</button>
+      <button mat-button [mat-dialog-close]="form.value" cdkFocusInitial>Add</button>
+    </div>
+</form>

@@ -7,6 +7,8 @@ import { MatDialog } from '@angular/material';
 import { AddBoardComponent } from './modals/add-board/add-board.component';
 import { EditBoardComponent } from './modals/edit-board/edit-board.component';
 import * as uuid from 'uuid';
+import { filter } from 'rxjs/operators';
+import { AddTaskComponent } from './modals/add-task/add-task.component';
 
 
 
@@ -43,30 +45,59 @@ export class MainboardComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.user.boards.push({id: uuid.v4(), boardName: result, description: 'hui', tasks: []});
+      console.log(JSON.stringify(result.newBoardName));
+      this.user.boards.push({id: uuid.v4(), boardName: result.newBoardName, description: result.newBoardDescription, tasks: []});
       this.userService.updateUser(this.user);
     });
   }
 
+  openAddTaskDialog(boardId) {
+    const dialogRef = this.dialog.open(AddTaskComponent, {
+      width: '300px',
+    });
+
+    const boardIndex = this.user.boards.findIndex(item => item.id === boardId);
+    console.log(this.user.boards[boardIndex].tasks);
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.user.boards[boardIndex].tasks.push({
+        id: uuid.v4(),
+        header: result.newTaskName,
+        description: result.newTaskDescription
+      });
+      this.userService.updateUser(this.user);
+    });
+  }
   deleteBoard(id) {
     this.user.boards.splice(this.user.boards.findIndex(item => item.id === id), 1);
     this.userService.updateUser(this.user);
   }
 
-  editBoard(boardKey) {
-    console.log(boardKey);
+  deleteTask(boardId, taskId) {
+
+  }
+
+  editBoard(id) {
+    const editableBoardId = this.user.boards.findIndex(item => item.id === id);
+    const editableBoard = this.user.boards[editableBoardId];
     const dialogRef = this.dialog.open(EditBoardComponent, {
       width: '250px',
-      data: { boardKey },
+      data: {
+        oldBoardName: editableBoard.boardName,
+        oldBoardDescription: editableBoard.description
+      },
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.user.boards[result] = Object.assign(this.user.boards[boardKey]);
-      delete this.user.boards[boardKey];
+      this.user.boards[editableBoardId].boardName = result.newBoardName;
+      this.user.boards[editableBoardId].description = result.newBoardDescription;
 
       this.userService.updateUser(this.user);
     });
+  }
+
+  editTask(boardId, taskId) {
+
   }
   // createBoard() {
   //   this.user.boards = {

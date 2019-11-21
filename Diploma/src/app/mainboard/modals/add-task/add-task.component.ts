@@ -1,25 +1,24 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
-  selector: 'app-add-board',
-  templateUrl: './add-board.component.html',
-  styleUrls: ['./add-board.component.scss']
+  selector: 'app-add-task',
+  templateUrl: './add-task.component.html',
+  styleUrls: ['./add-task.component.scss']
 })
-export class AddBoardComponent implements OnInit {
+export class AddTaskComponent implements OnInit {
   form: FormGroup;
-
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      newBoardName: '',
-      newBoardDescription: ''
+      newTaskName: '',
+      newTaskDescription: ''
     });
   }
 
   constructor(
-    public dialogRef: MatDialogRef<AddBoardComponent>,
+    public dialogRef: MatDialogRef<AddTaskComponent>,
     private formBuilder: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any) {}
 
