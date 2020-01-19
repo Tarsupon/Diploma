@@ -1,20 +1,12 @@
-<!-- <div class="container" fxLayout="row" >
-    <mat-card class="login-form" fxLayout="column" fxLayoutGap="32px" fxLayoutAlign="center center">
-        card
-    </mat-card>
-</div> -->
-<div class="container" fxLayout="wrap row" fxLayout.xs="column" fxLayoutGap="50%" fxLayoutAlign="center center">
-    <div fxFlex="20%">
-        <mat-card class="card">
-            <mat-card-header class="sign-in" fxLayoutAlign="center center">
-                <h2>Sign In</h2>
+
+        <mat-card class="card"  fxLayout="column" fxLayoutAlign="center center">
+            <mat-card-header class="sign-in"  fxLayoutAlign="center center">
+                <h2>{{'login.signin' | translate}}</h2>
             </mat-card-header>
 
-            <img mat-card-image src="assets/vollogodribbble.png" alt="Photo of a Shiba Inu">
+            <img mat-card-image src="assets/images/vollogodribbble.png" >
             <button mat-button class="google-button" (click)="auth.googleSignin()">
-                <img class="google-logo" src="assets/google.png">
-                Sign in with Google
+                <img class="google-logo" src="assets/images/google.png">
+                {{'buttons.signin google' | translate}}
             </button>
         </mat-card>
-    </div>
-</div>

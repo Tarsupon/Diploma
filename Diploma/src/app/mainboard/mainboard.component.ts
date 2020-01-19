@@ -9,6 +9,8 @@ import { EditBoardComponent } from './modals/edit-board/edit-board.component';
 import * as uuid from 'uuid';
 import { filter } from 'rxjs/operators';
 import { AddTaskComponent } from './modals/add-task/add-task.component';
+import { TranslateService } from '@ngx-translate/core';
+import { EditTaskComponent } from './modals/edit-task/edit-task.component';
 
 
 
@@ -20,8 +22,9 @@ import { AddTaskComponent } from './modals/add-task/add-task.component';
 export class MainboardComponent implements OnInit {
 
   public authUser: firebase.UserInfo;
-  public user: User;
+  public user: User = new User();
   constructor(
+    private translate: TranslateService,
     public auth: AuthService,
     public userService: UserService,
     public dialog: MatDialog) { }
@@ -45,7 +48,6 @@ export class MainboardComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(JSON.stringify(result.newBoardName));
       this.user.boards.push({id: uuid.v4(), boardName: result.newBoardName, description: result.newBoardDescription, tasks: []});
       this.userService.updateUser(this.user);
     });
@@ -74,7 +76,9 @@ export class MainboardComponent implements OnInit {
   }
 
   deleteTask(boardId, taskId) {
-
+    const deletableBoardId = this.user.boards.findIndex(item => item.id === boardId);
+    this.user.boards[deletableBoardId].tasks.splice(this.user.boards[deletableBoardId].tasks.findIndex(task => task.id === taskId), 1);
+    this.userService.updateUser(this.user);
   }
 
   editBoard(id) {
@@ -91,42 +95,29 @@ export class MainboardComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.user.boards[editableBoardId].boardName = result.newBoardName;
       this.user.boards[editableBoardId].description = result.newBoardDescription;
-
       this.userService.updateUser(this.user);
     });
   }
 
   editTask(boardId, taskId) {
+    const editableBoardId = this.user.boards.findIndex(item => item.id === boardId);
+    const editableTaskId = this.user.boards[editableBoardId].tasks.findIndex(item => item.id === taskId);
 
+    const dialogRef = this.dialog.open(EditTaskComponent, {
+      width: '250px',
+      data: {
+        oldTaskName: this.user.boards[editableBoardId].tasks[editableTaskId].header,
+        oldTaskDescription: this.user.boards[editableBoardId].tasks[editableTaskId].description
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.user.boards[editableBoardId].tasks[editableTaskId].header = result.newTaskName;
+      this.user.boards[editableBoardId].tasks[editableTaskId].description = result.newTaskDescription;
+      this.userService.updateUser(this.user);
+    });
   }
-  // createBoard() {
-  //   this.user.boards = {
-  //         Todo: [
-  //           {
-  //             id: '99999',
-  //             header: 'TODO'
-  //           },
-  //           {
-  //             id: '99999',
-  //             header: 'lil'
-  //           }
-  //         ],
-  //         InProgress: [
-  //           {
-  //             id: '99999',
-  //             header: 'InPROGREEs'
-  //           }
-  //         ],
-  //         Done: [
-  //           {
-  //             id: '99999',
-  //             header: 'DONe!!!'
-  //           }
-  //         ]
-  //   };
-  //   this.userService.updateUser(this.user);
-  //   // console.log(this.user)
-  // }
+
   drop(event: CdkDragDrop<Task[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);

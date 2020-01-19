@@ -1,0 +1,20 @@
+<form [formGroup]="form">
+  <h1 mat-dialog-title>{{'buttons.edit' | translate}} {{'mainboard.task' | translate}}</h1>
+  <div mat-dialog-content>
+
+    <p>{{'buttons.edit' | translate}}{{'mainboard.task' | translate}}</p>
+    <mat-form-field>
+      <input matInput type="text" formControlName="newTaskName">
+    </mat-form-field>
+
+    <p>{{'mainboard.description' | translate}}</p>
+    <mat-form-field>
+      <input matInput type="text"  formControlName="newTaskDescription">
+    </mat-form-field>
+
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button color="warn" (click)="onCancel()">{{'buttons.cancel' | translate}}</button>
+    <button mat-button [mat-dialog-close]="form.value" cdkFocusInitial>{{'buttons.edit' | translate}}</button>
+  </div>
+</form>

@@ -1,20 +1,20 @@
 <form [formGroup]="form">
-  <h1 mat-dialog-title>Add board</h1>
+  <h1 mat-dialog-title>{{'buttons.add' | translate}}{{'mainboard.board' | translate}}</h1>
     <div mat-dialog-content>
 
-      <p>Board Name</p>
+      <p>{{'mainboard.board name' | translate}}</p>
       <mat-form-field>
         <input matInput type="text" formControlName="newBoardName">
       </mat-form-field>
 
-      <p>Board Description</p>
+      <p>{{'mainboard.description' | translate}}</p>
       <mat-form-field>
         <input matInput type="text" formControlName="newBoardDescription">
       </mat-form-field>
 
     </div>
     <div mat-dialog-actions>
-      <button mat-button (click)="onCancel()">Cancel</button>
-      <button mat-button [mat-dialog-close]="form.value" cdkFocusInitial>Add</button>
+      <button mat-button (click)="onCancel()">{{'buttons.cancel' | translate}}</button>
+      <button mat-button [mat-dialog-close]="form.value" cdkFocusInitial>{{'buttons.add' | translate}}</button>
     </div>
 </form>

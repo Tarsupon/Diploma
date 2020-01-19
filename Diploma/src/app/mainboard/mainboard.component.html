@@ -1,17 +1,10 @@
-<div class="container" fxFlex="100%" fxLayout="column">
+<div class="container" fxLayout="column">
         <!-- HEADER -->
-            <mat-card fxLayout="row" fxLayoutAlign="end center" fxFlex="100%">
-                    <img class="header-photo" [src]="authUser.photoURL">
-                    <button mat-raised-button [matMenuTriggerFor]="headerMenu">
-                        {{authUser.displayName}}
-                    </button>
-                    <mat-menu #headerMenu="matMenu">
-                        <button mat-menu-item (click)="auth.signOut()">Log Out</button>
-                    </mat-menu>
-                </mat-card>
+        <app-header [authUser]="authUser"></app-header>
+
         <!-- CONTENT -->
-        <mat-card cdkDropListGroup class="main-content" fxFlex="100%" fxLayout="row"fxLayoutAlign="space-around start">
-            <mat-card class="board" *ngFor="let board of user.boards; let i = index" fxFlex="">
+        <div cdkDropListGroup class="main-content" fxLayout="row"fxLayoutAlign="space-around start" >
+            <mat-card class="board" *ngFor="let board of user.boards; let i = index">
                 <mat-card-header fxLayoutAlign="space-between start">
                     <mat-card-title>{{board.boardName}}</mat-card-title>
                     <mat-card-subtitle>{{board.description}}</mat-card-subtitle>
@@ -20,17 +13,21 @@
                     </button>
                 </mat-card-header>
                 <mat-menu #boardMenu="matMenu">
-                        <button mat-menu-item (click)="deleteBoard(board.id)">Delete</button>
-                        <button mat-menu-item (click)="editBoard(board.id)">Edit</button>
+                        <button mat-menu-item (click)="deleteBoard(board.id)">{{'buttons.delete' | translate}}</button>
+                        <button mat-menu-item (click)="editBoard(board.id)">{{'buttons.edit' | translate}}</button>
                 </mat-menu>
 
                 <div cdkDropList
+                     cdkDropListOrientation="horizontal"
                     [cdkDropListData]="user.boards[i].tasks"
                     class="example-list"
                     (cdkDropListDropped)="drop($event)"
                     fxLayout="column">
 
-                    <mat-card class="task"
+                  <button mat-button class="add-task-card" fxLayoutAlign="center center" (click)="openAddTaskDialog(board.id)">
+                    {{'mainboard.add task' | translate}}
+                  </button>
+                    <mat-card class="task" (dblclick)="editTask(board.id, item.id)"
                               *ngFor="let item of user.boards[i].tasks"
                               cdkDrag>
                         <mat-card-header class="task-header">
@@ -43,24 +40,16 @@
                             <p>{{item.description}}</p>
                         </mat-card-content>
                         <mat-menu #taskMenu="matMenu">
-                                <button mat-menu-item (click)="deleteTask(board.id, item.id)">Delete</button>
-                                <button mat-menu-item (click)="editTask(board.id, item.id)">Edit</button>
+                                <button mat-menu-item (click)="deleteTask(board.id, item.id)">{{'buttons.delete' | translate}}</button>
+                                <button mat-menu-item (click)="editTask(board.id, item.id)">{{'buttons.edit' | translate}}</button>
                         </mat-menu>
 
                     </mat-card>
-
-                    <mat-card class="add-task-card" fxLayoutAlign="center center" (click)="openAddTaskDialog(board.id)">
-                        <mat-card-header>
-                            <mat-card-title>Add new Task</mat-card-title>
-                        </mat-card-header>
-                    </mat-card>
                 </div>
             </mat-card>
-            <mat-card class="add-board-card" fxLayoutAlign="center center" fxFlex="10%" (click)="openAddBoardDialog()">
-                Add
-                New Board
+            <mat-card class="add-board-card" fxLayoutAlign="center center" (click)="openAddBoardDialog()">
+                {{'mainboard.add new board' | translate}}
             </mat-card>
                 <!-- <button mat-raised-button (click)="createBoard()">add</button> -->
-        </mat-card>
+        </div>
     </div>
-    

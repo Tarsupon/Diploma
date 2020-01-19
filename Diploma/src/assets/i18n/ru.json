@@ -1,0 +1,27 @@
+{
+  "buttons": {
+    "signin google": "Войти с помощью Google",
+    "logout": "Выйти",
+    "change lang": "Сменить язык",
+    "delete": "Удалить",
+    "edit": "Изменить",
+    "cancel": "Отмена",
+    "add": "Добавить"
+  },
+  "login": {
+    "signin": "Войти"
+  },
+  "language": {
+    "english": "Английский",
+    "russian": "Русский"
+  },
+  "mainboard": {
+    "add task": "Добавить задание",
+    "add new board": "Добавить доску",
+    "task": "задание",
+    "board": "доску",
+    "description": "Описание",
+    "board name": "Наименование доски",
+    "task name": "Наименование задания"
+  }
+}

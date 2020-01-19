@@ -13,6 +13,11 @@ import {
   MatMenuModule,
   MatDialogModule
 } from '@angular/material';
+import { TranslateModule } from '@ngx-translate/core';
+import { HeaderComponent } from './header/header.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { ChooseLangComponent } from './choose-lang/choose-lang.component';
+import { ScrollingModule } from "@angular/cdk/scrolling";
 
 const MATERIAL_MODULES = [
   MatCardModule,
@@ -23,19 +28,32 @@ const MATERIAL_MODULES = [
   DragDropModule,
   MatExpansionModule,
   MatMenuModule,
-  MatDialogModule
+  MatDialogModule,
+  MatToolbarModule
 ];
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    HeaderComponent,
+    ChooseLangComponent
+  ],
   imports: [
     CommonModule,
     FlexLayoutModule,
-    ...MATERIAL_MODULES
+    ...MATERIAL_MODULES,
+    TranslateModule,
+    ScrollingModule
   ],
   exports: [
     FlexLayoutModule,
-    ...MATERIAL_MODULES
+    ...MATERIAL_MODULES,
+    TranslateModule,
+    HeaderComponent,
+    ChooseLangComponent,
+    ScrollingModule
+  ],
+  entryComponents: [
+    ChooseLangComponent
   ]
 })
 export class SharedModule { }

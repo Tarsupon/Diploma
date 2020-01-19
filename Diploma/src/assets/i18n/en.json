@@ -1,0 +1,29 @@
+{
+  "buttons": {
+    "signin google": "Sign In  with Google",
+    "logout": "Log out",
+    "change lang": "Change language",
+    "delete": "Delete",
+    "edit": "Edit",
+    "cancel": "Cancel",
+    "add": "Add"
+  },
+  "login": {
+    "signin": "Sign in"
+  },
+  "language": {
+    "english": "English",
+    "russian": "Russian"
+  },
+  "mainboard": {
+    "add task": "Add new task",
+    "add new board": "Add new board",
+    "task": "task",
+    "board": "board",
+    "description": "Description",
+    "board name": "Board name",
+    "task name": "Task name"
+
+
+  }
+}

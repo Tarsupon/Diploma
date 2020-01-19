@@ -13,7 +13,7 @@ export class EditBoardComponent implements OnInit {
   form: FormGroup;
 
   constructor(
-    public dialogRef: MatDialogRef<AddBoardComponent>,
+    public dialogRef: MatDialogRef<EditBoardComponent>,
     private formBuilder: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any) {}
 

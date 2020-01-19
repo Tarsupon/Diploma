@@ -1,4 +1,4 @@
-export interface User {
+export class User {
     email: string;
     displayName: string;
     photoURL?: string;
@@ -9,14 +9,14 @@ export interface User {
     // };
 }
 
-export interface Board {
+export class Board {
     id: string;
     boardName: string;
     description: string;
     tasks: Task[];
 }
 
-export interface Task {
+export class Task {
     id: string;
     description: string;
     header: string;

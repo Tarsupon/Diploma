@@ -1,0 +1,13 @@
+<mat-toolbar color="primary" class="header" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100%">
+  <img class="logo" src="assets/images/vollogodribbble.png">
+  <div fxLayout="row" fxLayoutAlign="end center">
+    <img class="header-photo" [src]="authUser?.photoURL">
+    <button mat-raised-button [matMenuTriggerFor]="headerMenu">
+      {{authUser?.displayName}}
+    </button>
+  </div>
+</mat-toolbar>
+<mat-menu #headerMenu="matMenu">
+  <button mat-menu-item (click)="authService.signOut()">{{'buttons.logout' | translate}}</button>
+  <button mat-menu-item (click)="showLanguageDialog()">{{'buttons.change lang' | translate}}</button>
+</mat-menu>

@@ -1,20 +1,22 @@
-.container {
-    margin-top: 20vh;
-    height: 60vh;
+
     .card{
-        
+      margin: auto;
+      padding: auto;
+      height: 100vh;
+        .mat-card-header {
+          text-align: center;
+        }
+
+        .mat-card-image {
+          width: 30%;
+        }
         .google-button {
             align-items: center;
             box-shadow: 1px 1px 1px grey;
-            font-size: 80%;
-            width: 100%;
-            margin-bottom: 20%;
 
             .google-logo {
-                width: 7%;
-                height: 7%;
-                padding-right: 5%;
+              width: 7%;
             }
         }
     }
-}
+

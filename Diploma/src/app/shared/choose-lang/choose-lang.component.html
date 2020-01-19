@@ -1,0 +1,9 @@
+<form fxLayout="column" fxLayoutAlign="start center">
+  <button mat-button (click)="useLanguage('ru')">
+    <img class="icon" src="assets/images/rus.ico">{{'language.russian'| translate}}
+  </button>
+
+  <button mat-button (click)="useLanguage('en')">
+    <img class="icon" src="assets/images/en.ico">{{'language.english'| translate}}
+  </button>
+</form>
